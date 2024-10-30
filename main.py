@@ -116,6 +116,7 @@ def shop():
         for weapon in weapons_list:
             if weapons_list[weapon]["level_required"] <= player.level:
                 print("")
+                print(weapons_list[weapon])
                 for item,value in weapons_list[weapon].items():
                     print(item,": ",value)
                 print("-------------------------------")
@@ -138,6 +139,7 @@ def shop():
         for armor in armors_list:
             if armors_list[armor]["level_required"]<= player.level:
                 print("")
+                print(armors_list[armor])
                 for item,value in armors_list[armor].items():
                     print(item,': ',value)
                 print("-------------------------------")
@@ -160,6 +162,7 @@ def shop():
         for utilities in utilities_list:
             if utilities_list[utilities]["level_required"]<= player.level:
                 print("")
+                print(utilities_list[utilities])
                 for item,value in utilities_list[utilities].items():
                     print(item,': ',value)
                 print("-------------------------------")
