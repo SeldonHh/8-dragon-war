@@ -1,0 +1,18 @@
+{
+    "utilities":{
+        "health potion":{
+            "name":"health potion",
+            "level_required": 1,
+            "effectiveness": 5,
+            "price": 10,
+            "description":"A common health potion imbued in mana, very used for basic healing"
+        },
+        "fireball_scroll":{
+            "name":"fireball_scroll",
+            "level_required": 2,
+            "effectiveness":10,
+            "price":20,
+            "description":"A parchment infused with a basic elemental spell. Anyone can use it, yet , it's effective"
+        }
+    }
+}
