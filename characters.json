@@ -5,6 +5,10 @@
       "race": "orc",
       "level": 1,
       "gold": 10,
+      "health":30,
+      "damage":5,
+      "mana_regen":5,
+      "ultimate_damage":15,
       "gamestage": 1,
       "inventory": {}
     },
@@ -13,6 +17,10 @@
       "race": "tiefling",
       "level": 2,
       "gold": 5,
+      "health":30,
+      "damage":5,
+      "mana_regen":5,
+      "ultimate_damage":15,
       "gamestage": 2,
       "inventory": {
         "copper sword": {

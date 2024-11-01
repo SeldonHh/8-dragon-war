@@ -2,8 +2,10 @@ import json
 import sys
 import time
 import os
+import random
 
 start = True
+zone = "Desert"
 
 # Function to check file existence and initialize with default data if missing
 def load_json(file_path, default_data):
@@ -24,6 +26,10 @@ default_characters = {
             "race": "orc",
             "level": 1,
             "gold": 10,
+            "health":30,
+            "damage":5,
+            "mana_regen":5,
+            "ultimate_damage":15,
             "gamestage": 0,
             "inventory": {}
         }
@@ -52,6 +58,33 @@ def write_json(file, data, sort=False):
     with open(file, "w") as json_files:
         json.dump(data, json_files, indent=2, sort_keys=sort)
 
+def choose_monster() :
+    global monster
+    if zone == "Desert":
+        monster = random.choice(["Giant Scorpio","Bandit","Sand Elemental","Sand Golem"])
+        if monster == "Giant Scorpio":
+            monster = Monster("Giant Scorpio",25,12,10,125)
+        if monster == "Bandit":
+            monster = Monster("Bandit",20,28,5,70)
+        if monster == "Sand Elemental":
+            monster = Monster("Sand Elemental",30,10,30,60)
+        if monster == "Sand Golem":
+            monster = Monster("Sand Golem",70,20,0,0)
+    else:
+        print("Sorry, the mounsters went on vacation, there's not any in the code")
+    return monster
+
+def display_fight():
+    print(f'\r{monster.name}', end='', flush=True)
+    print(f"{player.name}")
+    print(f'\rHp: {monster.hp}', end='', flush=True)
+    print(f"Hp: {player.health}")
+    print(f'\rDmg: {monster.damage}', end='', flush=True)
+    print(f"Dmg: {player.damage}")    
+    print(f'\rMr: {monster.mana_regen}', end='', flush=True)
+    print(f"Mr: {player.mana_regen}")    
+    print(f'\rUlt: {monster.ultimate_damage}', end='', flush=True)
+    print(f"Ult: {player.ultimate_damage}")
 # Character management functions
 def update_character(category, data):
     """Updates character attributes and writes them to the JSON file."""
@@ -60,18 +93,34 @@ def update_character(category, data):
 
 # Player class to represent the selected character
 class Player:
-    def __init__(self, name, race, gold, inventory, level, game_stage):
+    def __init__(self, name, race, gold, inventory, level, health, damage, mana_regen, ultimate_damage, game_stage):
         self.name = name
         self.race = race
         self.gold = gold
         self.inventory = inventory
         self.level = level
+        self.health = health
+        self.damage = damage
+        self.mana_regen = mana_regen
+        self.ultimate_damage = ultimate_damage
         self.game_stage = game_stage
+
 
     def update_game_stage(self, new_stage):
         """Updates the player's game stage and writes to character data."""
         self.game_stage = new_stage
         update_character("gamestage", new_stage)
+#Monster class
+
+class Monster:
+    
+    def __init__(self,name,hp,damage,mana_regen,ultimate_damage,loot=None):
+        self.name = name
+        self.hp = hp
+        self.damage = damage
+        self.mana_regen = mana_regen
+        self.ultimate_damage = ultimate_damage
+        self.loot = loot
 
 # Function to select a character from the JSON file
 def select_character():
@@ -92,6 +141,10 @@ def select_character():
             character["gold"],
             character["inventory"],
             character["level"],
+            character["health"],
+            character["damage"],
+            character["mana_regen"],
+            character["ultimate_damage"],
             character["gamestage"]
         )
     except KeyError:
@@ -99,8 +152,11 @@ def select_character():
         select_character()
 
 # Game stages and functions
-def combat(Monster):
-    print(Monster)
+def combat():
+    monster = choose_monster()
+    write(f"You got ambushed by a {monster.name}, fight it\n"+" ")
+    display_fight()
+    print("-----------------------")
 
 def welcome():
     """Displays welcome message."""
@@ -170,11 +226,11 @@ def shop():
             print("Please enter a valid option.")
 
 def journey_to_Albanhera():
-    if not player.inventory == True:
-        write("why did you choose to leave the market naked you weirdo")
+    if (not player.inventory) == True:
+        write("Why did you choose to leave the market naked you weirdo")
         player.update_game_stage(1)
         exit()
-    print("Not finished yet")
+    combat()
 
 def main():
     """Main function to control game flow based on player's game stage."""
@@ -190,7 +246,7 @@ def main():
         shop()
     elif player.game_stage == 2:
         if not player.inventory == False:
-            write("with your new found equipement you go on a journey with Axit and Zorael your two acolytes. Unfortunately it is hard to approach Al'Banhera because Zul'Sahar's guards are killing everyone that isn't corrupted. Some merchants told you that the bandit's chief might know a way to get in.")
+            write("With your new found equipement you go on a journey with Axit and Zorael your two acolytes. Unfortunately it is hard to approach Al'Banhera because Zul'Sahar's guards are killing everyone that isn't corrupted. Some merchants told you that the bandit's chief might know a way to get in.")
             print("-------------------------------------")
         journey_to_Albanhera()
 
