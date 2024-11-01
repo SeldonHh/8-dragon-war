@@ -8,13 +8,32 @@
       "gamestage": 1,
       "inventory": {}
     },
-    "Seldon":{
-      "name":"Seldon",
-      "race":"tiefling",
-      "level":2,
-      "gold":125,
-      "gamestage":0,
-      "inventory":{}
+    "Seldon": {
+      "name": "Seldon",
+      "race": "tiefling",
+      "level": 2,
+      "gold": 5,
+      "gamestage": 2,
+      "inventory": {
+        "copper sword": {
+          "level_required": 1,
+          "atk": 5,
+          "price": 50,
+          "description": "The basic of the basic sword. It can still do it's job tho"
+        },
+        "leather tunic": {
+          "level_required": 1,
+          "defense": 5,
+          "price": 50,
+          "description": "Just some leather, it's better than being nude you guess"
+        },
+        "fireball_scroll": {
+          "level_required": 2,
+          "effectiveness": 10,
+          "price": 20,
+          "description": "A parchment infused with a basic elemental spell. Anyone can use it, yet , it's effective"
+        }
+      }
     }
   }
 }

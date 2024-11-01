@@ -99,6 +99,9 @@ def select_character():
         select_character()
 
 # Game stages and functions
+def combat(Monster):
+    print(Monster)
+
 def welcome():
     """Displays welcome message."""
     print("-------------------------------")
@@ -162,16 +165,16 @@ def shop():
             print(f"Inventory: {player.inventory}\nGold: {player.gold}")
             if input("Are you sure you want to leave? (y/n): ").lower() == 'y':
                 player.update_game_stage(2)
-                break
+                main()
         else:
             print("Please enter a valid option.")
 
 def journey_to_Albanhera():
-    if player.inventory == False:
+    if not player.inventory == True:
         write("why did you choose to leave the market naked you weirdo")
         player.update_game_stage(1)
         exit()
-    write("with your new found equipement")
+    print("Not finished yet")
 
 def main():
     """Main function to control game flow based on player's game stage."""
@@ -186,6 +189,9 @@ def main():
     elif player.game_stage == 1:
         shop()
     elif player.game_stage == 2:
+        if not player.inventory == False:
+            write("with your new found equipement you go on a journey with Axit and Zorael your two acolytes. Unfortunately it is hard to approach Al'Banhera because Zul'Sahar's guards are killing everyone that isn't corrupted. Some merchants told you that the bandit's chief might know a way to get in.")
+            print("-------------------------------------")
         journey_to_Albanhera()
 
 main()
