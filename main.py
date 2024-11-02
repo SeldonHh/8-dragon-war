@@ -78,13 +78,13 @@ def display_fight():
         print(f'\r{monster.name}', end='', flush=True)
         print("{:>12}".format(player.name))
         print(f'\rHp: {monster.hp}', end='', flush=True)
-        print("{:>12}".format(f'Hp:{player.health}'))
+        print("{:>19}".format(f'Hp:{player.health}'))
         print(f'\rDmg: {monster.damage}', end='', flush=True)
-        print("{:>12}".format(f"Dmg: {player.damage}"))
+        print("{:>19}".format(f"Dmg: {player.damage}"))
         print(f'\rMr: {monster.mana_regen}', end='', flush=True)
-        print("{:>12}".format(f"Mr: {player.mana_regen}")) 
+        print("{:>19}".format(f"Mr: {player.mana_regen}")) 
         print(f'\rUlt: {monster.ultimate_damage}', end='', flush=True)
-        print("{:>12}".format(f"Ult: {player.ultimate_damage}"))
+        print("{:>19}".format(f"Ult: {player.ultimate_damage}"))
 # Character management functions
 def update_character(category, data):
     """Updates character attributes and writes them to the JSON file."""
@@ -130,7 +130,10 @@ def select_character():
         print("Available Characters:")
         for name, character in characters["characters"].items():
             for attr, value in character.items():
-                print(f"{attr}: {value}")
+                if attr == "inventory":
+                    print(f'{attr}: {value.keys()}')
+                else:
+                    print(f"{attr}: {value}")
             print("-------------------------------")
 
         selection = input("Choose a character by name: ")
@@ -151,12 +154,27 @@ def select_character():
         print("Character not found. Please try again.")
         select_character()
 
+def fight_action():
+    action = input("1: Strike,      2: Ultimate      3: Use Items     4: Run        5:Cry")
+    if action == "1":
+        print("")
+    if action == "2":
+        print("")
+    if action == "3":
+        print("")
+    if action == "4":
+        print("")
+    if action == "5":
+        print("You are effectively useless\n----------------------------")
+        fight_action()
+
 # Game stages and functions
 def combat():
     monster = choose_monster()
     write(f"You got ambushed by a {monster.name}, fight it\n"+" ")
     display_fight()
     print("-----------------------")
+    fight_action()
 
 def welcome():
     """Displays welcome message."""
@@ -218,7 +236,7 @@ def shop():
         elif choice == '3':
             display_shop(utilities["utilities"], "Utility")
         elif choice == '4':
-            print(f"Inventory: {player.inventory}\nGold: {player.gold}")
+            print(f"Inventory: {player.inventory.keys}\nGold: {player.gold}")
             if input("Are you sure you want to leave? (y/n): ").lower() == 'y':
                 player.update_game_stage(2)
                 main()
