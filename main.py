@@ -104,6 +104,46 @@ class Player:
         self.mana_regen = mana_regen
         self.ultimate_damage = ultimate_damage
         self.game_stage = game_stage
+        self.mana = 0
+
+    def fight_action(self):
+        action = input("1: Strike,      2: Ultimate      3: Use Items     4: Run        5:Cry   ")
+        if action == "1":
+            monster.hp -= self.damage
+            print(f"You inflict {self.damage}")
+            if monster.hp <= 0:
+                print("he dead")
+            self.mana += self.mana_regen
+
+        if action == "2":
+            if self.mana >= 100:
+                self.mana = 0
+                monster.hp -= self.ultimate_damage
+                if monster.hp <= 0:
+                    print("he dead")
+
+                print(f"You launch a powerful strike, inflicting {self.ultimate_damage} to the ennemy")
+            else:
+                print("You do not have enough energy bozo, you know what, you won't get your turn back. You fail pathetically at attacking and take 5 damage")
+                self.health -= 5
+
+        if action == "3":
+            for item in self.inventory:
+                if self.inventory[item]["category"] == "utilities":
+                    print(f"{item}: {self.inventory[item]["description"]}")
+            print("-------------------------------------------")
+            self.mana += self.mana_regen
+
+        if action == "4":
+            if self.health > monster.hp:
+                print("you escaped")
+            else:
+                print("sorry buddy, the ennemy catches you")
+            self.mana += self.mana_regen
+
+        if action == "5":
+            print("You are effectively useless\n----------------------------")
+            self.mana += self.mana_regen
 
 
     def update_game_stage(self, new_stage):
@@ -121,6 +161,7 @@ class Monster:
         self.mana_regen = mana_regen
         self.ultimate_damage = ultimate_damage
         self.loot = loot
+        self.mana = 0
 
 # Function to select a character from the JSON file
 def select_character():
@@ -154,27 +195,13 @@ def select_character():
         print("Character not found. Please try again.")
         select_character()
 
-def fight_action():
-    action = input("1: Strike,      2: Ultimate      3: Use Items     4: Run        5:Cry")
-    if action == "1":
-        print("")
-    if action == "2":
-        print("")
-    if action == "3":
-        print("")
-    if action == "4":
-        print("")
-    if action == "5":
-        print("You are effectively useless\n----------------------------")
-        fight_action()
-
 # Game stages and functions
 def combat():
     monster = choose_monster()
     write(f"You got ambushed by a {monster.name}, fight it\n"+" ")
     display_fight()
     print("-----------------------")
-    fight_action()
+    player.fight_action()
 
 def welcome():
     """Displays welcome message."""

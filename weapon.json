@@ -4,12 +4,14 @@
             "level_required":1,
             "atk": 5,
             "price": 50,
+            "category":"weapon",
             "description":"The basic of the basic sword. It can still do it's job tho"
         },
         "iron dagger":{
             "level_required":2,
             "atk":10,
             "price":100,
+            "category":"weapon",
             "description":"This is a swift weapon, one of the favorite weapon of elves and humans."
         }
     }

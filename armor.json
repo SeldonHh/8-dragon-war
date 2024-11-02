@@ -4,12 +4,14 @@
           "level_required": 1,
           "defense": 5,
           "price": 50,
+          "category":"armor",
           "description":"Just some leather, it's better than being nude you guess"
       },
       "enchanted robe":{
           "level_required": 2,
           "defense":10,
           "price":100,
+          "category":"armor",
           "description":"it's a robe but it have a defensive magic enchantement, it's a little bit protective"
       }
   }
