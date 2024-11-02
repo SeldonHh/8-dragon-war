@@ -75,16 +75,16 @@ def choose_monster() :
     return monster
 
 def display_fight():
-    print(f'\r{monster.name}', end='', flush=True)
-    print(f"{player.name}")
-    print(f'\rHp: {monster.hp}', end='', flush=True)
-    print(f"Hp: {player.health}")
-    print(f'\rDmg: {monster.damage}', end='', flush=True)
-    print(f"Dmg: {player.damage}")    
-    print(f'\rMr: {monster.mana_regen}', end='', flush=True)
-    print(f"Mr: {player.mana_regen}")    
-    print(f'\rUlt: {monster.ultimate_damage}', end='', flush=True)
-    print(f"Ult: {player.ultimate_damage}")
+        print(f'\r{monster.name}', end='', flush=True)
+        print("{:>12}".format(player.name))
+        print(f'\rHp: {monster.hp}', end='', flush=True)
+        print("{:>12}".format(f'Hp:{player.health}'))
+        print(f'\rDmg: {monster.damage}', end='', flush=True)
+        print("{:>12}".format(f"Dmg: {player.damage}"))
+        print(f'\rMr: {monster.mana_regen}', end='', flush=True)
+        print("{:>12}".format(f"Mr: {player.mana_regen}")) 
+        print(f'\rUlt: {monster.ultimate_damage}', end='', flush=True)
+        print("{:>12}".format(f"Ult: {player.ultimate_damage}"))
 # Character management functions
 def update_character(category, data):
     """Updates character attributes and writes them to the JSON file."""
